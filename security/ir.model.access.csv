@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_method_localizacion__henua_method_localizacion__henua,method_localizacion__henua.method_localizacion__henua,model_method_localizacion__henua_method_localizacion__henua,,1,0,0,0
