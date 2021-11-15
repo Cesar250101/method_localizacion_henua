@@ -39,7 +39,7 @@ class StockPicking(models.Model):
     def _compute_str_codigobarra(self):
         self.str_codigobarra = self.str_origin_codigobarra.replace('Ñ',':').replace('ñ',';').replace('?','_')
     
-    @api.multi
+    #@api.multi
     def leer_productos(self):
         strcodigo=self.str_codigobarra
         codigo_split=strcodigo.split(';')
@@ -70,7 +70,7 @@ class StockPicking(models.Model):
                     raise Warning(("El siguiente producto no existe: %s" % productostr))
 
 
-    @api.multi
+    #@api.multi
     def button_validate(self):
         root = xml.Element("Picking")
         linea=""
