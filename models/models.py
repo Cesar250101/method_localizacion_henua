@@ -7,7 +7,7 @@ import base64
 from pdf417 import encode, encoding, render_image, render_svg
 import logging
 from odoo.exceptions import AccessError, UserError, RedirectWarning, ValidationError, Warning
-
+import pdf417gen
 
 _logger = logging.getLogger(__name__)
 
@@ -58,6 +58,7 @@ class StockPicking(models.Model):
                                 "name":self.name,
                                 "product_id":product_id,
                                 "product_uom_qty":cantidad,
+                                "quantity_done":cantidad,
                                 "product_uom":uom_id,
                                 "location_id":self.location_id.id,
                                 "location_dest_id":self.location_dest_id.id
