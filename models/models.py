@@ -37,7 +37,8 @@ class StockPicking(models.Model):
 
     @api.depends('str_origin_codigobarra')
     def _compute_str_codigobarra(self):
-        self.str_codigobarra = self.str_origin_codigobarra.replace('Ñ',':').replace('ñ',';').replace('?','_')
+        if self.str_origin_codigobarra:
+            self.str_codigobarra = self.str_origin_codigobarra.replace('Ñ',':').replace('ñ',';').replace('?','_')
     
     #@api.multi
     def leer_productos(self):
