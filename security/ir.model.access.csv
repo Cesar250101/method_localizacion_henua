@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_method_localizacion__henua_method_localizacion__henua,method_localizacion__henua.method_localizacion__henua,model_method_localizacion__henua_method_localizacion__henua,,1,0,0,0
+henua_transportes,henua_transportes,method_localizacion_henua.model_method_localizacion_heuna_transporte,purchase.group_purchase_manager,1,1,1,1
+henua_motivos,henua_transportes,method_localizacion_henua.model_method_localizacion_heuna_motivo_ajuste,stock.group_stock_manager,1,1,1,1
+

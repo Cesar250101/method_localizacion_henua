@@ -4,7 +4,7 @@ from itertools import product
 from odoo import models, fields, api
 import xml.etree.ElementTree as xml 
 import base64
-from pdf417 import encode, encoding, render_image, render_svg
+
 import logging
 from odoo.exceptions import AccessError, UserError, RedirectWarning, ValidationError, Warning
 
@@ -27,17 +27,44 @@ try:
     from PIL import Image, ImageDraw, ImageFont
 except ImportError:
     _logger.warning("no se ha cargado PIL")
+
+class OrdenCompra(models.Model):
+    _inherit = 'purchase.order'
+
+    transporte_id = fields.Many2one(comodel_name='method_localizacion_heuna.transporte', string='Transporte',required=True)
+
+class Ajustes(models.Model):
+    _inherit = 'stock.inventory'
+
+    motivo_id = fields.Many2one(comodel_name='method_localizacion_heuna.motivo_ajuste', string='Motivo Ajuste',required=True)
+
+
+class MotivoAjuste(models.Model):
+    _name = 'method_localizacion_heuna.motivo_ajuste'
+
+    name = fields.Char(string='Nombre Motivo Ajuste')
+
+
+class Transporte(models.Model):
+    _name = 'method_localizacion_heuna.transporte'
+
+    name = fields.Char(string='Nombre Transporte')
+    
+
+
+
+
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     string_picking = fields.Char(string='XML del Picking')    
     barcode_img = fields.Binary(string="Barcode Image", help="Barcode Image in PDF417 format",)
     str_origin_codigobarra = fields.Char(string='String código de barras')  
-    str_codigobarra = fields.Char(string='String código de barras',compute="_compute_str_codigobarra", store=True)  
+    # str_codigobarra = fields.Char(string='String código de barras',compute="_compute_str_codigobarra", store=True)  
 
-    @api.depends('str_origin_codigobarra')
-    def _compute_str_codigobarra(self):
-        self.str_codigobarra = self.str_origin_codigobarra.replace('Ñ',':').replace('ñ',';').replace('?','_')
+    # @api.depends('str_origin_codigobarra')
+    # def _compute_str_codigobarra(self):
+    #     self.str_codigobarra = self.str_origin_codigobarra.replace('Ñ',':').replace('ñ',';').replace('?','_')
     
     @api.one
     def leer_productos(self):
