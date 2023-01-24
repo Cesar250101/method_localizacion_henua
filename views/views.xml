@@ -9,7 +9,7 @@
       <field name="inherit_id" ref="purchase.purchase_order_form"/>
       <field name="arch" type="xml">
         <xpath expr="//field[@name='date_order']" position="after">
-          <field name="transporte_id"/>
+          <field name="transporte_id" options="{'no_create': True}"/>
         </xpath>        
       </field>
     </record>
