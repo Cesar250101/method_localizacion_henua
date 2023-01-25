@@ -97,24 +97,24 @@ class StockPicking(models.Model):
                     raise Warning(("El siguiente producto no existe: %s" % productostr))
 
 
-    @api.multi
-    def button_validate(self):
-        root = xml.Element("Picking")
-        linea=""
-        for i in self.move_ids_without_package:      
-            linea+=i.product_id.default_code +":"+str(i.product_uom_qty)+";"
-        self.string_picking=linea
-        barcodes = encode(linea)
-        barcodes_img= render_image(barcodes) 
-        barcodefile = BytesIO()
-        image = self.pdf417bc(self.string_picking, 13, 3)
-        image.save(barcodefile, "PNG")
-        data = barcodefile.getvalue()
-        self.barcode_img= base64.b64encode(data)
-        super(StockPicking,self).button_validate()
+    # @api.multi
+    # def button_validate(self):
+    #     root = xml.Element("Picking")
+    #     linea=""
+    #     for i in self.move_ids_without_package:      
+    #         linea+=i.product_id.default_code +":"+str(i.product_uom_qty)+";"
+    #     self.string_picking=linea
+    #     barcodes = encode(linea)
+    #     barcodes_img= render_image(barcodes) 
+    #     barcodefile = BytesIO()
+    #     image = self.pdf417bc(self.string_picking, 13, 3)
+    #     image.save(barcodefile, "PNG")
+    #     data = barcodefile.getvalue()
+    #     self.barcode_img= base64.b64encode(data)
+    #     super(StockPicking,self).button_validate()
 
-    def pdf417bc(self, ted, columns=13, ratio=3):
-        #bc = pdf417gen.encode(ted, security_level=5, columns=columns, encoding="ISO-8859-1",)
-        bc = pdf417gen.encode(ted, security_level=5, columns=columns, encoding="UTF-8",)
-        image = pdf417gen.render_image(bc, padding=15, scale=1, ratio=ratio,)
-        return image            
+    # def pdf417bc(self, ted, columns=13, ratio=3):
+    #     #bc = pdf417gen.encode(ted, security_level=5, columns=columns, encoding="ISO-8859-1",)
+    #     bc = pdf417gen.encode(ted, security_level=5, columns=columns, encoding="UTF-8",)
+    #     image = pdf417gen.render_image(bc, padding=15, scale=1, ratio=ratio,)
+    #     return image            
