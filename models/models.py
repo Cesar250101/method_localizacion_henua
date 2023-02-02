@@ -39,7 +39,7 @@ class Ajustes(models.Model):
     categoria_ajuste = fields.Selection([
         ('ajustes', 'Ajuste de Inventario'),
         ('merma', 'Merma')
-    ], string='Categoría Ajuste')
+    ], string='Categoría Ajuste',required=True)
     motivo_id = fields.Many2one(comodel_name='method_localizacion_heuna.motivo_ajuste', string='Motivo Ajuste',)
 
 
