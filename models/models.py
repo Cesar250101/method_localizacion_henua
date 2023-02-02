@@ -36,7 +36,11 @@ class OrdenCompra(models.Model):
 class Ajustes(models.Model):
     _inherit = 'stock.inventory'
 
-    motivo_id = fields.Many2one(comodel_name='method_localizacion_heuna.motivo_ajuste', string='Motivo Ajuste',required=True)
+    categoria_ajuste = fields.Selection([
+        ('ajustes', 'Ajuste de Inventario'),
+        ('merma', 'Merma')
+    ], string='Categoría Ajuste')
+    motivo_id = fields.Many2one(comodel_name='method_localizacion_heuna.motivo_ajuste', string='Motivo Ajuste',)
 
 
 class MotivoAjuste(models.Model):
